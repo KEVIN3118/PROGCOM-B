@@ -1,0 +1,225 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": []
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "source": [
+        "11"
+      ],
+      "metadata": {
+        "id": "2Ypz2OZAmiYA"
+      }
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "FW_DqEzvlT3A"
+      },
+      "outputs": [],
+      "source": [
+        "import math\n",
+        "print(\"¡Bienvenido al programa de cálculo de IMC!\")\n",
+        "while True:\n",
+        "    peso = float(input(\"Ingresa tu peso en kg: \"))\n",
+        "    altura = float(input(\"Ingresa tu altura en metros: \"))\n",
+        "    imc = peso / (altura ** 2)\n",
+        "    if imc < 18.5:\n",
+        "        categoria = \"Bajo peso\"\n",
+        "        recomendacion = \"Es recomendable que consultes a un médico o nutricionista para mejorar tu alimentación.\"\n",
+        "    elif 18.5 <= imc < 24.9:\n",
+        "        categoria = \"Peso normal\"\n",
+        "        recomendacion = \"¡Felicidades! Mantén una dieta equilibrada y haz ejercicio regularmente.\"\n",
+        "    elif 25 <= imc < 29.9:\n",
+        "        categoria = \"Sobrepeso\"\n",
+        "        recomendacion = \"Es importante que te concentres en una dieta saludable y realices ejercicio regularmente.\"\n",
+        "    else:\n",
+        "        categoria = \"Obesidad\"\n",
+        "        recomendacion = \"Te recomendamos que consultes a un médico para crear un plan de acción para reducir el peso.\"\n",
+        "    print(f\"\\nTu IMC es {imc:.2f}.\")\n",
+        "    print(f\"Categoría: {categoria}\")\n",
+        "    print(recomendacion)\n",
+        "    continuar = input(\"\\n¿Quieres calcular otro IMC? (sí/no): \").lower()\n",
+        "    if continuar == 'no':\n",
+        "        print(\"Gracias por usar el programa. ¡Cuídate!\")\n",
+        "        break"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "12"
+      ],
+      "metadata": {
+        "id": "KgvhpZVKmtrR"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "\n",
+        "print(\"¡Bienvenido a la calculadora simple!\")\n",
+        "while True:\n",
+        "    num1 = int(input(\"Ingresa el primer número: \"))\n",
+        "    num2 = int(input(\"Ingresa el segundo número: \"))\n",
+        "    print(\"Operaciones disponibles:\")\n",
+        "    print(\"1. Suma (+)\")\n",
+        "    print(\"2. Resta (-)\")\n",
+        "    print(\"3. Multiplicación (*)\")\n",
+        "    print(\"4. División (/)\")\n",
+        "    operacion = input(\"Elige una operación (1/2/3/4): \")\n",
+        "    if operacion == '1':\n",
+        "        resultado = num1 + num2\n",
+        "        print(f\"El resultado de {num1} + {num2} es: {resultado}\")\n",
+        "    elif operacion == '2':\n",
+        "        resultado = num1 - num2\n",
+        "        print(f\"El resultado de {num1} - {num2} es: {resultado}\")\n",
+        "    elif operacion == '3':\n",
+        "        resultado = num1 * num2\n",
+        "        print(f\"El resultado de {num1} * {num2} es: {resultado}\")\n",
+        "    elif operacion == '4':\n",
+        "        if num2 != 0:\n",
+        "            resultado = num1 // num2\n",
+        "            print(f\"El resultado de {num1} / {num2} es: {resultado}\")\n",
+        "        else:\n",
+        "            print(\"¡Error! No se puede dividir entre cero.\")\n",
+        "    else:\n",
+        "        print(\"Opción no válida, por favor ingresa una opción entre 1 y 4.\")\n",
+        "    continuar = input(\"\\n¿Quieres realizar otra operación? (sí/no): \")\n",
+        "\n",
+        "    if continuar == 'no' or continuar == 'NO':\n",
+        "        print(\"Gracias por usar la calculadora. ¡Hasta luego!\")\n",
+        "        break\n",
+        "    elif continuar != 'sí' and continuar != 'SI':\n",
+        "        print(\"Opción no válida, por favor ingresa 'sí' o 'no'.\")"
+      ],
+      "metadata": {
+        "id": "uF5U6kKjmhNJ"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "14"
+      ],
+      "metadata": {
+        "id": "GQhVtOXxpSie"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "\n",
+        "print(\"¡Bienvenido al programa que determina el día de la semana!\")\n",
+        "while True:\n",
+        "    dia_numero = int(input(\"Ingresa un número entre 1 y 7 para saber el día de la semana: \"))\n",
+        "    if dia_numero == 1:\n",
+        "        dia = \"Lunes\"\n",
+        "    elif dia_numero == 2:\n",
+        "        dia = \"Martes\"\n",
+        "    elif dia_numero == 3:\n",
+        "        dia = \"Miércoles\"\n",
+        "    elif dia_numero == 4:\n",
+        "        dia = \"Jueves\"\n",
+        "    elif dia_numero == 5:\n",
+        "        dia = \"Viernes\"\n",
+        "    elif dia_numero == 6:\n",
+        "        dia = \"Sábado\"\n",
+        "    elif dia_numero == 7:\n",
+        "        dia = \"Domingo\"\n",
+        "    else:\n",
+        "        print(\"Número inválido. Por favor ingresa un número entre 1 y 7.\")\n",
+        "        continue\n",
+        "    print(f\"El día correspondiente al número {dia_numero} es: {dia}\")\n",
+        "    continuar = input(\"\\n¿Quieres ingresar otro número? (sí/no): \")\n",
+        "\n",
+        "    if continuar == 'no' or continuar == 'NO':\n",
+        "        print(\"Gracias por usar el programa. ¡Hasta luego!\")\n",
+        "        break"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "ygrzj1uFpSVm",
+        "outputId": "c0f98229-d5d3-41f0-b405-6c9fe1ad9aab"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "¡Bienvenido al programa que determina el día de la semana!\n",
+            "Ingresa un número entre 1 y 7 para saber el día de la semana: 5\n",
+            "El día correspondiente al número 5 es: Viernes\n",
+            "\n",
+            "¿Quieres ingresar otro número? (sí/no): no\n",
+            "Gracias por usar el programa. ¡Hasta luego!\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "16"
+      ],
+      "metadata": {
+        "id": "BJL-GyDXpnHd"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "\n",
+        "print(\"¡Bienvenido al programa que muestra la tabla de multiplicar de un número!\")\n",
+        "\n",
+        "numero = int(input(\"Ingresa un número para ver su tabla de multiplicar: \"))\n",
+        "\n",
+        "print(f\"\\nTabla de multiplicar del {numero}:\")\n",
+        "for i in range(1, 11):\n",
+        "    resultado = numero * i\n",
+        "    print(f\"{numero} x {i} = {resultado}\")\n",
+        "\n",
+        "continuar = input(\"\\n¿Quieres ver otra tabla? (sí/no): \")\n",
+        "if continuar == 'no' or continuar == 'NO':\n",
+        "    print(\"Gracias por usar el programa. ¡Hasta luego!\")"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 106
+        },
+        "id": "QdSniLhPpm-m",
+        "outputId": "52f79ffb-cfbb-4da0-be97-8a0094c58961"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "SyntaxError",
+          "evalue": "unterminated string literal (detected at line 11) (<ipython-input-2-63f169c2e00a>, line 11)",
+          "traceback": [
+            "\u001b[0;36m  File \u001b[0;32m\"<ipython-input-2-63f169c2e00a>\"\u001b[0;36m, line \u001b[0;32m11\u001b[0m\n\u001b[0;31m    if continuar == 'no' or continuar == 'NO\u001b[0m\n\u001b[0m                                         ^\u001b[0m\n\u001b[0;31mSyntaxError\u001b[0m\u001b[0;31m:\u001b[0m unterminated string literal (detected at line 11)\n"
+          ]
+        }
+      ]
+    }
+  ]
+}
