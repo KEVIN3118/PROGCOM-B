@@ -1,0 +1,627 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": []
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Escribe un programa que calcule el índice de masa corporal (IMC) y determine la categoría (bajo peso, normal, sobrepeso, obesidad). Al final, el programa debe imprimir: el nombre del usuario, su categoría y una breve descripción de lo que debe hacer de acuerdo a su categoría."
+      ],
+      "metadata": {
+        "id": "3b4dqR8pMOGe"
+      }
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "zXm0UVfSL0QM"
+      },
+      "outputs": [],
+      "source": [
+        "for IMC in range(1,3):\n",
+        "  N=(input(print(\"Ingrese su nombre\")))\n",
+        "  P=int(input(print(\"Ingrese su peso en Kg\")))\n",
+        "  E=float(input(print(\"Ingrese su estatura en metros\")))\n",
+        "  IMC=P/(E**2)\n",
+        "  if IMC<=18.5:\n",
+        "    print(f\"{N} Usted esta en un peso bajo, su IMC es de {IMC}\")\n",
+        "  if IMC>=18.5 and IMC<=24.9:\n",
+        "    print(f\"{N} Usted esta en un peso normal, su IMC es de {IMC}\")\n",
+        "  if IMC>=25 and IMC<=29.9:\n",
+        "    print(f\"{N} Usted esta en sobrepeso, su IMC es de {IMC}\")\n",
+        "  if IMC>=30:\n",
+        "    print(f\"{N} Usted esta en obesidad, su IMC es de {IMC}\")"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def IMC():\n",
+        "  while True:\n",
+        "    nombre = input(print(\"Ingrese su nombre: \"))\n",
+        "    peso = float(input(print(\"Ingrese su peso en kg: \")))\n",
+        "    estatura = float(input(print(\"Ingrese su estatura en metros: \")))\n",
+        "    imc = peso / (estatura ** 2)\n",
+        "  else: print('Error')\n",
+        ""
+      ],
+      "metadata": {
+        "id": "r6FYkq1xL5Zn"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Desarrolla un programa que simule una calculadora simple (+, -, *, /) con dos números."
+      ],
+      "metadata": {
+        "id": "MDmxygL9MCbN"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "for R in range(1,4):\n",
+        "  A1=float(input(print(\"Ingrese un numero\")))\n",
+        "  A2=float(input(print(\"Ingrese otro numero\")))\n",
+        "  R1=input(\"Para sumar ingrese +,Para restar ingrese -, Para multiplicar ingrese *,Para dividir ingrese /\")\n",
+        "  if R1==\"+\":\n",
+        "    print(\"El resultado es:\")\n",
+        "    print(F\"{A1}+{A2}={A1+A2}\")\n",
+        "  elif R1==\"-\":\n",
+        "    print(\"El resultado es:\")\n",
+        "    print(F\"{A1}-{A2}={A1-A2}\")\n",
+        "  elif R1==\"*\":\n",
+        "    print(\"El resultado es:\")\n",
+        "    print(F\"{A1}*{A2}={A1*A2}\")\n",
+        "  elif R1==\"/\":\n",
+        "    print(\"El resultado es:\")\n",
+        "    print(F\"{A1}/{A2}={A1/A2}\")\n",
+        "  else:\n",
+        "    print(\"Error\")"
+      ],
+      "metadata": {
+        "id": "arcjpz5VMDMC"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def calculadora():\n",
+        "    while True:\n",
+        "        print(\"Operaciones disponibles:\")\n",
+        "        print(\"1. Suma\")\n",
+        "        print(\"2. Resta\")\n",
+        "        print(\"3. Multiplicación\")\n",
+        "        print(\"4. División\")\n",
+        "        opcion = input(\"Selecciona una operación (1/2/3/4): \")\n",
+        "        if opcion not in ['1', '2', '3', '4']:\n",
+        "            print(\"Opción no válida. Intenta de nuevo.\")\n",
+        "            continue\n",
+        "        num1 = input(\"Ingresa el primer número: \")\n",
+        "        num2 = input(\"Ingresa el segundo número: \")\n",
+        "        if not num1.replace('.', '', 1).isdigit() or not num2.replace('.', '', 1).isdigit():\n",
+        "            print(\"Por favor, ingresa números válidos.\")\n",
+        "            continue\n",
+        "        num1 = float(num1)\n",
+        "        num2 = float(num2)\n",
+        "        if opcion == '1':\n",
+        "            resultado = num1 + num2\n",
+        "            print(f\"{num1} + {num2} = {resultado}\")\n",
+        "        elif opcion == '2':\n",
+        "            resultado = num1 - num2\n",
+        "            print(f\"{num1} - {num2} = {resultado}\")\n",
+        "        elif opcion == '3':\n",
+        "            resultado = num1 * num2\n",
+        "            print(f\"{num1} * {num2} = {resultado}\")\n",
+        "        elif opcion == '4':\n",
+        "            if num2 == 0:\n",
+        "                print(\"Error: No se puede dividir entre 0.\")\n",
+        "            else:\n",
+        "                resultado = num1 / num2\n",
+        "                print(f\"{num1} / {num2} = {resultado}\")\n",
+        "        continuar = input(\"¿Quieres realizar otra operación? (sí/no): \").lower()\n",
+        "        if continuar != 'sí':\n",
+        "            print(\"Saliendo de la calculadora...\")\n",
+        "            break"
+      ],
+      "metadata": {
+        "id": "-DlZSuxoMd6w"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Crea un programa que determine la calificación en letras (A, B, C, D, F) según una nota numérica (0-100)"
+      ],
+      "metadata": {
+        "id": "jaSrtcU4MqbF"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def calificación():\n",
+        "  while True:\n",
+        "    C1=input(print(\"Ingrese su nota\"))\n",
+        "  if C1==\"A\":\n",
+        "    print(\"Su nota es:\")\n",
+        "    print(\"100\")\n",
+        "  elif C1==\"B\":\n",
+        "    print(\"Su nota es:\")\n",
+        "    print(\"80\")\n",
+        "  elif C1==\"C\":\n",
+        "    print(\"Su nota es:\")\n",
+        "    print(\"60\")\n",
+        "  elif C1==\"D\":\n",
+        "    print(\"Su nota es:\")\n",
+        "    print(\"40\")\n",
+        "  elif C1==\"F\":\n",
+        "    print(\"Su nota es:\")\n",
+        "    print(\"20\")\n",
+        "  else:\n",
+        "    print(\"Error\")"
+      ],
+      "metadata": {
+        "id": "Oy3ITgPkMqEj"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "for C in range(1,4):\n",
+        "  C1=input(print(\"Ingrese su nota\"))\n",
+        "  if C1==\"A\":\n",
+        "    print(\"Su nota es:\")\n",
+        "    print(\"100\")\n",
+        "  elif C1==\"B\":\n",
+        "    print(\"Su nota es:\")\n",
+        "    print(\"80\")\n",
+        "  elif C1==\"C\":\n",
+        "    print(\"Su nota es:\")\n",
+        "    print(\"60\")\n",
+        "  elif C1==\"D\":\n",
+        "    print(\"Su nota es:\")\n",
+        "    print(\"40\")\n",
+        "  elif C1==\"F\":\n",
+        "    print(\"Su nota es:\")\n",
+        "    print(\"20\")\n",
+        "  else:\n",
+        "    print(\"Error\")"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "nHD4GdDBMzax",
+        "outputId": "3830bcbb-3890-4f89-c7e6-6aa11e6984af"
+      },
+      "execution_count": 2,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Ingrese su nota\n",
+            "Nonehola\n",
+            "Error\n",
+            "Ingrese su nota\n",
+            "Noneque paso\n",
+            "Error\n",
+            "Ingrese su nota\n",
+            "None0\n",
+            "Error\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Escribe un programa que determine el día de la semana según un número (1-7)."
+      ],
+      "metadata": {
+        "id": "zn9DDlPLNA0Y"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "\n",
+        "def dia():\n",
+        "  while True:\n",
+        "    Dia=int(input(print(\"Ingrese un numero del 1 al 7 para saber que dia de la semana es\")))\n",
+        "    if Dia<=0 and Dia>7:\n",
+        "      print(\"Error\")\n",
+        "    else:\n",
+        "      if Dia==1:\n",
+        "       print(\"Es Lunes\")\n",
+        "      elif Dia==2:\n",
+        "       print(\"Es Martes\")\n",
+        "      elif Dia==3:\n",
+        "       print(\"Es Miercoles\")\n",
+        "      elif Dia==4:\n",
+        "       print(\"Es Jueves\")\n",
+        "      elif Dia==5:\n",
+        "       print(\"Es Viernes\")\n",
+        "      elif Dia==6:\n",
+        "       print(\"Es Sabado\")\n",
+        "      elif Dia==7:\n",
+        "       print(\"Es Domingo\")\n",
+        "      return True"
+      ],
+      "metadata": {
+        "id": "qD3iVLx7NHM0"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "\n",
+        "for Dia in range(1,4):\n",
+        "  Dia=int(input(print(\"Ingrese un numero del 1 al 7 para saber que dia de la semana es\")))\n",
+        "  if Dia==1:\n",
+        "    print(\"Es Lunes\")\n",
+        "  elif Dia==2:\n",
+        "    print(\"Es Martes\")\n",
+        "  elif Dia==3:\n",
+        "    print(\"Es Miercoles\")\n",
+        "  elif Dia==4:\n",
+        "    print(\"Es Jueves\")\n",
+        "  elif Dia==5:\n",
+        "    print(\"Es Viernes\")\n",
+        "  elif Dia==6:\n",
+        "    print(\"Es Sabado\")\n",
+        "  elif Dia==7:\n",
+        "    print(\"Es Domingo\")\n",
+        "  else:\n",
+        "    print(\"Error\")\n",
+        ""
+      ],
+      "metadata": {
+        "id": "WE-U68H6Nflc"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Desarrolla un programa que valide si tres números pueden formar un triángulo y de qué tipo es"
+      ],
+      "metadata": {
+        "id": "V0KyjWIGNzsy"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "\n",
+        "for Triangulo in range(1,4):\n",
+        "  L1=int(input(print(\"Ingrese un lado del triangulo en metros\")))\n",
+        "  L2=int(input(print(\"Ingrese un lado del triangulo en metros\")))\n",
+        "  L3=int(input(print(\"Ingrese un lado del triangulo en metros\")))\n",
+        "  if (L1+L2>=L3) and (L2+L3>=L1) and (L3+L1>=L2):\n",
+        "    print(\"El triangulo es valido\")\n",
+        "    if L1==L2 and L2==L3:\n",
+        "      print(\"El triangulo es equilatero\")\n",
+        "    elif L1==L2 or L2==L3 or L1==L3:\n",
+        "      print(\"El triangulo es isoceles\")\n",
+        "    else:\n",
+        "     print(\"El triangulo es escaleno\")\n",
+        "  else:\n",
+        "    print(\"El triangulo no es valido\")"
+      ],
+      "metadata": {
+        "id": "8EV7mQn-N4Ue"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def T():\n",
+        " while L1 >= 0:\n",
+        "   L1 = int(input(\"Ingresa el primer lado: \"))\n",
+        "   if L1 <= 0:\n",
+        "    print(\"El lado debe ser mayor a 0\")\n",
+        "\n",
+        "   while L2 >= 0:\n",
+        "    L2 = int(input(\"Ingresa el segundo lado: \"))\n",
+        "    if L2 <= 0:\n",
+        "     print(\"El lado debe ser mayor a 0\")\n",
+        "\n",
+        "    while L3 >= 0:\n",
+        "     L3 = int(input(\"Ingresa el tercer lado: \"))\n",
+        "    if L3 <= 0:\n",
+        "     print(\"El lado debe ser mayor a 0\")\n",
+        "\n",
+        "   if(L1 + L2 > L3  and L1 + L3 > L2 and L2 + L3 > L1):\n",
+        "    print(\"Se puede formar un triangulo\")\n",
+        "    if(L1 == L2 and L2 == L3):\n",
+        "      print(\"El triangulo es equilatero\")\n",
+        "    elif(L1 == L2 or L1 == L3 or L2 == L3):\n",
+        "      print(\"El triangulo es isoceles\")\n",
+        "    else:\n",
+        "      print(\"El triangulo es escaleno\")\n",
+        " else:\n",
+        "   print(\"No se puede formar un triangulo\")\n",
+        ""
+      ],
+      "metadata": {
+        "id": "Q4zVUlRLN-0y"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Crea un programa que muestre la tabla de multiplicar de un número hasta el 10."
+      ],
+      "metadata": {
+        "id": "SW-hHH0tOEtw"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def tabla():\n",
+        "  while True:\n",
+        "    N=int(input(print(\"Ingrese un numero del 1 al 10\")))\n",
+        "    if N<=0 and N>10:\n",
+        "      print(\"Error\")\n",
+        "    else:\n",
+        "      for i in range(1,11):\n",
+        "        print(f\"{N}x{i}={N*i}\")\n",
+        "      return True"
+      ],
+      "metadata": {
+        "id": "sREEwAleOZ1d"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "for tabl in range (0,9,1):\n",
+        " N=int(input(print(\"Ingrese un numero del 1 al 10\")))\n",
+        " if (N<=0) and (N>10):\n",
+        "    print(\"Error\")\n",
+        " else:\n",
+        "    for i in range(1,11):\n",
+        "      print(f\"{N}x{i}={N*i}\")"
+      ],
+      "metadata": {
+        "id": "MJrWLCVWPEdQ"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Escribe un programa que calcule la suma de números naturales hasta n."
+      ],
+      "metadata": {
+        "id": "wK03Vt_APLdf"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def suma(n):\n",
+        "\n",
+        " while True:\n",
+        "        n = int(input(\"Que cantidad de veces quiere sumar los numeros?\"))\n",
+        "        n1 = int(input(\"Ingresa un número entero positivo: \"))\n",
+        "        n2 = int(input(\"Ingresa el segundo número entero positivo: \"))\n",
+        "        if n1 < 0 and n2 < 0:\n",
+        "            print(\"Error\")\n",
+        "        else:\n",
+        "            print(f'la suma de los numeros es {(n1+n2)*n}')\n",
+        "            break"
+      ],
+      "metadata": {
+        "id": "TVqvrG4PPNFO"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "for N in range (1,3):\n",
+        "  n=int(input(print(\"Que cantidad de veces quiere sumar los numeros?\")))\n",
+        "  n1=int(input(print(\"Ingrese un número\")))\n",
+        "  n2=int(input(print(\"Ingrese un número\")))\n",
+        "  if n1<0 and n2<0:\n",
+        "    print(\"Error\")\n",
+        "  else:\n",
+        "    print(f'la suma de los numeros es {((n1+n2)*n)}')"
+      ],
+      "metadata": {
+        "id": "xV3IvfVrPc5m"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Desarrolla un programa que calcule el factorial de un número. Recuerda que el factorial de 0 es 1 y no existen factoriales negativos."
+      ],
+      "metadata": {
+        "id": "AfhnmNO7Pe15"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def factorial(n):\n",
+        "    resultado = 1\n",
+        "    for i in range(1, n + 1):\n",
+        "        resultado *= i\n",
+        "    return resultado\n",
+        "numero = int(input(\"Ingrese un número para calcular su factorial: \"))\n",
+        "factorial_final = factorial(numero)\n",
+        "print(f\"El factorial de {numero} es {factorial_final}\")"
+      ],
+      "metadata": {
+        "id": "r1Mv_zirPitp"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def factorial(n):\n",
+        "    resultado = 1\n",
+        "    i = 1\n",
+        "    while i <= n:\n",
+        "        resultado *= i\n",
+        "        i += 1\n",
+        "    return resultado\n",
+        "numero = int(input(\"Ingrese un número para calcular su factorial: \"))\n",
+        "factorial_final = factorial(numero)\n",
+        "print(f\"El factorial de {numero} es {factorial_final}\")"
+      ],
+      "metadata": {
+        "id": "0vmQZOBFPmTb"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Crea un programa que muestre los primeros n números de la serie Fibonacci."
+      ],
+      "metadata": {
+        "id": "mhcl24aLPwuV"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "n = int(input(\"Ingrese la cantidad de números de la serie Fibonacci que desea mostrar: \"))\n",
+        "def fibonacci(n):\n",
+        "    fib_sequence = [0, 1]\n",
+        "    for i in range(2, n):\n",
+        "        siguiente = fib_sequence[-1] + fib_sequence[-2]\n",
+        "        fib_sequence.append(siguiente)\n",
+        "    return fib_sequence\n",
+        "serie_fibonacci = fibonacci(n)\n",
+        "print(f\"Los primeros {n} números de la serie Fibonacci son: {serie_fibonacci}\")"
+      ],
+      "metadata": {
+        "id": "_uGVG9PzP6Pr"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "n = int(input(\"Ingrese la cantidad de números de la serie Fibonacci que desea mostrar: \"))\n",
+        "def fibonacci(n):\n",
+        "    fib_sequence = [0, 1]\n",
+        "    a, b = 0, 1\n",
+        "    i = 2\n",
+        "    while i < n:\n",
+        "        siguiente = a + b\n",
+        "        fib_sequence.append(siguiente)\n",
+        "        a = b\n",
+        "        b = siguiente\n",
+        "        i += 1\n",
+        "    return fib_sequence\n",
+        "serie_fibonacci = fibonacci(n)\n",
+        "print(f\"Los primeros {n} números de la serie Fibonacci son: {serie_fibonacci}\")"
+      ],
+      "metadata": {
+        "id": "BVZ9XJEXQK1w"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Escribe un programa que adivine entre un conjunto de diez colores definidos por el usuario, con un máximo de 10 intentos."
+      ],
+      "metadata": {
+        "id": "Hrw-LJ6TQVtJ"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def color():\n",
+        "  colores = [\"Azul\", \"Amarillo\", \"Rojo\", \"Verde\", \"Naranja\", \"Morado\", \"Blanco\", \"Negro\"]\n",
+        "  print(\"Los colores a adivinar son: Azul, Amarillo, Rojo, Verde, Naranja, Morado, Blanco, Negro]\")\n",
+        "  random.choice(colores)\n",
+        "  for i in range (0,9):\n",
+        "    C1=input(\"Adivina el color:\")\n",
+        "    if C1==random.choice(colores):\n",
+        "      print(\"Correcto\")\n",
+        "    else:\n",
+        "      print(\"Incorrecto\")"
+      ],
+      "metadata": {
+        "id": "yylxbpyNQaDT"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import random\n",
+        "colores = [\"Azul\", \"Amarillo\", \"Rojo\", \"Verde\", \"Naranja\", \"Morado\", \"Blanco\", \"Negro\"]\n",
+        "print(\"Los colores a adivinar son: Azul, Amarillo, Rojo, Verde, Naranja, Morado, Blanco, Negro\")\n",
+        "color_adivinar = random.choice(colores)\n",
+        "intentos = 0\n",
+        "C=print(\"Adivida el color:Azul, Amarillo, Rojo, Verde, Naranja, Morado, Blanco, Negro\")\n",
+        "while intentos < 10:\n",
+        "    C1 = input(\"Ingrese un color: \")\n",
+        "    if C1 == color_adivinar:\n",
+        "        print(\"Correcto\")\n",
+        "        break\n",
+        "    else:\n",
+        "         print(\"Incorrecto\")\n",
+        "    intentos += 1"
+      ],
+      "metadata": {
+        "id": "SIeMHLsQQeC8"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
