@@ -1,0 +1,467 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": []
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "source": [
+        "1"
+      ],
+      "metadata": {
+        "id": "N05qfQTbGNBJ"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import csv\n",
+        "import random\n",
+        "import pandas as pd\n",
+        "\n",
+        "class Paciente:\n",
+        "    def __init__(self, id, saturacion, vacunas, prueba_covid):\n",
+        "        self.id = id\n",
+        "        self.saturacion = saturacion\n",
+        "        self.vacunas = vacunas\n",
+        "        self.prueba_covid = prueba_covid\n",
+        "        self.diagnostico = \"\"\n",
+        "\n",
+        "    def evaluar(self):\n",
+        "        if self.saturacion < 90 or self.vacunas < 2:\n",
+        "            self.diagnostico = \"Sala COVID\"\n",
+        "        elif self.prueba_covid:\n",
+        "            self.diagnostico = \"Sala COVID\"\n",
+        "        else:\n",
+        "            self.diagnostico = \"Urgencias\"\n",
+        "\n",
+        "class SistemaPacientes:\n",
+        "    def __init__(self, cantidad_pacientes=50):\n",
+        "        self.pacientes = []\n",
+        "        self.urgencias_ocupadas = 0\n",
+        "        self.camillas_disponibles = 10\n",
+        "        self.generar_pacientes(cantidad_pacientes)\n",
+        "\n",
+        "    def generar_pacientes(self, cantidad):\n",
+        "        for i in range(cantidad):\n",
+        "            saturacion = random.randint(85, 100)\n",
+        "            vacunas = random.randint(0, 4)\n",
+        "            prueba = random.choice([True, False])\n",
+        "            paciente = Paciente(i+1, saturacion, vacunas, prueba)\n",
+        "            paciente.evaluar()\n",
+        "            if paciente.diagnostico == \"Urgencias\":\n",
+        "                if self.urgencias_ocupadas < self.camillas_disponibles:\n",
+        "                    self.urgencias_ocupadas += 1\n",
+        "                else:\n",
+        "                    paciente.diagnostico = \"En espera\"\n",
+        "            self.pacientes.append(paciente)\n",
+        "\n",
+        "    def guardar_y_mostrar_resultados(self, archivo):\n",
+        "        with open(archivo, \"w\", newline=\"\") as archivo_csv:\n",
+        "            escritor = csv.writer(archivo_csv)\n",
+        "            escritor.writerow([\"ID\", \"Saturación\", \"Vacunas\", \"Prueba COVID\", \"Diagnóstico\"])\n",
+        "            for p in self.pacientes:\n",
+        "                prueba_texto = \"Sí\" if p.prueba_covid else \"No\"\n",
+        "                escritor.writerow([p.id, p.saturacion, p.vacunas, prueba_texto, p.diagnostico])\n",
+        "        df = pd.read_csv(archivo)\n",
+        "        print(\"Primeros resultados de los pacientes:\")\n",
+        "        print(df.head(10))\n",
+        "\n",
+        "sistema = SistemaPacientes()\n",
+        "sistema.guardar_y_mostrar_resultados(\"pacientes.csv\")"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "0L9nbP0VHOUM",
+        "outputId": "f2b8d7d8-6d6a-441a-9da6-6f1ae48f0e55"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Primeros resultados de los pacientes:\n",
+            "   ID  Saturación  Vacunas Prueba COVID Diagnóstico\n",
+            "0   1          89        3           Sí  Sala COVID\n",
+            "1   2          99        1           No  Sala COVID\n",
+            "2   3          97        2           Sí  Sala COVID\n",
+            "3   4          89        2           Sí  Sala COVID\n",
+            "4   5          98        3           No   Urgencias\n",
+            "5   6          89        2           Sí  Sala COVID\n",
+            "6   7          88        3           Sí  Sala COVID\n",
+            "7   8         100        0           Sí  Sala COVID\n",
+            "8   9          87        0           No  Sala COVID\n",
+            "9  10          97        2           Sí  Sala COVID\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "2"
+      ],
+      "metadata": {
+        "id": "GAuF6X_aHpk3"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import csv\n",
+        "import random\n",
+        "import pandas as pd\n",
+        "\n",
+        "class Persona:\n",
+        "    def __init__(self, id, tiene_tarjetas, esta_reportado, tipo_trabajo, credito_otro_banco, credito_mismo_banco, edad):\n",
+        "        self.id = id\n",
+        "        self.tiene_tarjetas = tiene_tarjetas\n",
+        "        self.esta_reportado = esta_reportado\n",
+        "        self.tipo_trabajo = tipo_trabajo\n",
+        "        self.credito_otro_banco = credito_otro_banco\n",
+        "        self.credito_mismo_banco = credito_mismo_banco\n",
+        "        self.edad = edad\n",
+        "        self.puntaje = 0\n",
+        "        self.aprobado = False\n",
+        "\n",
+        "    def evaluar(self):\n",
+        "        if self.tiene_tarjetas:\n",
+        "            self.puntaje += 1\n",
+        "        if not self.esta_reportado:\n",
+        "            self.puntaje += 3\n",
+        "        if self.tipo_trabajo == \"definido\":\n",
+        "            self.puntaje += 2\n",
+        "        elif self.tipo_trabajo == \"indefinido\":\n",
+        "            self.puntaje += 3\n",
+        "        if self.credito_otro_banco:\n",
+        "            self.puntaje += 2\n",
+        "        if self.credito_mismo_banco:\n",
+        "            self.puntaje += 3\n",
+        "        if 18 <= self.edad <= 22:\n",
+        "            self.puntaje += 2\n",
+        "        elif 23 <= self.edad <= 30:\n",
+        "            self.puntaje += 4\n",
+        "        elif 31 <= self.edad <= 40:\n",
+        "            self.puntaje += 3\n",
+        "        elif self.edad > 41:\n",
+        "            self.puntaje += 1\n",
+        "\n",
+        "        self.aprobado = self.puntaje >= 6\n",
+        "\n",
+        "class SistemaCreditos:\n",
+        "    def __init__(self, cantidad=50):\n",
+        "        self.personas = []\n",
+        "        self.generar_personas(cantidad)\n",
+        "\n",
+        "    def generar_personas(self, cantidad):\n",
+        "        for i in range(cantidad):\n",
+        "            tarjetas = random.choice([True, False])\n",
+        "            reportado = random.choice([True, False])\n",
+        "            trabajo = random.choice([\"definido\", \"indefinido\", \"ninguno\"])\n",
+        "            otro_banco = random.choice([True, False])\n",
+        "            mismo_banco = random.choice([True, False])\n",
+        "            edad = random.randint(18, 60)\n",
+        "            persona = Persona(i+1, tarjetas, reportado, trabajo, otro_banco, mismo_banco, edad)\n",
+        "            persona.evaluar()\n",
+        "            self.personas.append(persona)\n",
+        "\n",
+        "    def guardar_y_mostrar_resultados(self, archivo):\n",
+        "        with open(archivo, \"w\", newline=\"\") as archivo_csv:\n",
+        "            escritor = csv.writer(archivo_csv)\n",
+        "            escritor.writerow([\"ID\", \"Tarjetas\", \"Reportado\", \"Trabajo\", \"Crédito Otro Banco\",\n",
+        "                               \"Crédito Mismo Banco\", \"Edad\", \"Puntaje\", \"Aprobado\"])\n",
+        "            for p in self.personas:\n",
+        "                escritor.writerow([\n",
+        "                    p.id,\n",
+        "                    \"Sí\" if p.tiene_tarjetas else \"No\",\n",
+        "                    \"Sí\" if p.esta_reportado else \"No\",\n",
+        "                    p.tipo_trabajo,\n",
+        "                    \"Sí\" if p.credito_otro_banco else \"No\",\n",
+        "                    \"Sí\" if p.credito_mismo_banco else \"No\",\n",
+        "                    p.edad,\n",
+        "                    p.puntaje,\n",
+        "                    \"Sí\" if p.aprobado else \"No\"\n",
+        "                ])\n",
+        "        df = pd.read_csv(archivo)\n",
+        "        print(\"Primeros resultados del crédito:\")\n",
+        "        print(df.head(10))\n",
+        "\n",
+        "sistema_credito = SistemaCreditos()\n",
+        "sistema_credito.guardar_y_mostrar_resultados(\"creditos.csv\")"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "qkZ23oZHHpyU",
+        "outputId": "5eb58773-e2fe-4b36-bfd2-0dca7beaf323"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "metadata": {
+            "tags": null
+          },
+          "name": "stdout",
+          "output_type": "stream",
+          "text": [
+            "Primeros resultados del crédito:\n",
+            "   ID Tarjetas Reportado     Trabajo Crédito Otro Banco Crédito Mismo Banco  \\\n",
+            "0   1       No        Sí     ninguno                 No                  No   \n",
+            "1   2       Sí        Sí    definido                 Sí                  No   \n",
+            "2   3       No        No    definido                 Sí                  No   \n",
+            "3   4       Sí        Sí  indefinido                 No                  Sí   \n",
+            "4   5       Sí        No     ninguno                 Sí                  Sí   \n",
+            "5   6       Sí        Sí  indefinido                 Sí                  No   \n",
+            "6   7       No        Sí    definido                 Sí                  No   \n",
+            "7   8       No        No    definido                 No                  No   \n",
+            "8   9       Sí        Sí     ninguno                 No                  Sí   \n",
+            "9  10       No        Sí     ninguno                 No                  No   \n",
+            "\n",
+            "   Edad  Puntaje Aprobado  \n",
+            "0    53        1       No  \n",
+            "1    48        6       Sí  \n",
+            "2    28       11       Sí  \n",
+            "3    29       11       Sí  \n",
+            "4    29       13       Sí  \n",
+            "5    50        7       Sí  \n",
+            "6    53        5       No  \n",
+            "7    34        8       Sí  \n",
+            "8    43        5       No  \n",
+            "9    29        4       No  \n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "3"
+      ],
+      "metadata": {
+        "id": "a0kNFaL-IJ3x"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import random\n",
+        "import csv\n",
+        "import pandas as pd\n",
+        "\n",
+        "class SensorDeHumedad:\n",
+        "    def __init__(self):\n",
+        "        self.registros = []\n",
+        "        self.grifo_abierto = False\n",
+        "\n",
+        "    def simular_un_dia(self, mediciones=20):\n",
+        "        print(f\"Simulando un día con {mediciones} mediciones de humedad...\\n\")\n",
+        "        for toma in range(mediciones):\n",
+        "            humedad = round(random.uniform(0, 10), 2)\n",
+        "            alerta = \"\"\n",
+        "            accion = \"\"\n",
+        "\n",
+        "            if humedad < 3:\n",
+        "                alerta = \"Humedad baja\"\n",
+        "                if not self.grifo_abierto:\n",
+        "                    accion = \"Abrir grifo\"\n",
+        "                    self.grifo_abierto = True\n",
+        "            elif humedad > 8:\n",
+        "                alerta = \"Humedad alta\"\n",
+        "                if self.grifo_abierto:\n",
+        "                    accion = \"Cerrar grifo y absorber agua\"\n",
+        "                    self.grifo_abierto = False\n",
+        "            else:\n",
+        "                alerta = \"Humedad normal\"\n",
+        "                if self.grifo_abierto:\n",
+        "                    accion = \"Cerrar grifo\"\n",
+        "                    self.grifo_abierto = False\n",
+        "\n",
+        "            self.registros.append((toma + 1, humedad, alerta, accion))\n",
+        "\n",
+        "    def guardar_y_mostrar(self, nombre_archivo):\n",
+        "        with open(nombre_archivo, mode='w', newline='') as archivo:\n",
+        "            escritor = csv.writer(archivo)\n",
+        "            escritor.writerow([\"Toma\", \"Humedad\", \"Alerta\", \"Acción\"])\n",
+        "            for registro in self.registros:\n",
+        "                escritor.writerow(registro)\n",
+        "\n",
+        "        datos = pd.read_csv(nombre_archivo)\n",
+        "        print(\"=== REGISTROS COMPLETOS DE HUMEDAD ===\")\n",
+        "        print(datos.to_string(index=False))\n",
+        "\n",
+        "# Crear una instancia del sensor y simular un día\n",
+        "sensor = SensorDeHumedad()\n",
+        "sensor.simular_un_dia()\n",
+        "sensor.guardar_y_mostrar(\"registros_humedad.csv\")"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "u1lz7taMJETD",
+        "outputId": "82459dca-8d72-471d-d81d-f50e74e63131"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Simulando un día con 20 mediciones de humedad...\n",
+            "\n",
+            "=== REGISTROS COMPLETOS DE HUMEDAD ===\n",
+            " Toma  Humedad         Alerta                       Acción\n",
+            "    1     0.16   Humedad baja                  Abrir grifo\n",
+            "    2     8.48   Humedad alta Cerrar grifo y absorber agua\n",
+            "    3     8.69   Humedad alta                          NaN\n",
+            "    4     9.95   Humedad alta                          NaN\n",
+            "    5     3.86 Humedad normal                          NaN\n",
+            "    6     1.30   Humedad baja                  Abrir grifo\n",
+            "    7     8.37   Humedad alta Cerrar grifo y absorber agua\n",
+            "    8     9.03   Humedad alta                          NaN\n",
+            "    9     7.23 Humedad normal                          NaN\n",
+            "   10     6.24 Humedad normal                          NaN\n",
+            "   11     9.58   Humedad alta                          NaN\n",
+            "   12     0.29   Humedad baja                  Abrir grifo\n",
+            "   13     7.18 Humedad normal                 Cerrar grifo\n",
+            "   14     6.16 Humedad normal                          NaN\n",
+            "   15     1.54   Humedad baja                  Abrir grifo\n",
+            "   16     2.31   Humedad baja                          NaN\n",
+            "   17     3.04 Humedad normal                 Cerrar grifo\n",
+            "   18     4.53 Humedad normal                          NaN\n",
+            "   19     4.45 Humedad normal                          NaN\n",
+            "   20     2.26   Humedad baja                  Abrir grifo\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "4"
+      ],
+      "metadata": {
+        "id": "ReepzHExIMIS"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import random\n",
+        "import csv\n",
+        "\n",
+        "class SimuladorDeDólar:\n",
+        "    def __init__(self, base=4000):\n",
+        "        self.base = base\n",
+        "        self.registros = []\n",
+        "        self.valor_cierre = 0\n",
+        "        self.mensaje_cierre = \"\"\n",
+        "\n",
+        "    def simular(self, cantidad_registros=20):\n",
+        "        valor_actual = self.base\n",
+        "        for numero_registro in range(1, cantidad_registros + 1):\n",
+        "            variación = random.randint(-300, 300)\n",
+        "            valor_actual += variación\n",
+        "            valor_actual = max(valor_actual, 2500)\n",
+        "\n",
+        "            alerta = \"\"\n",
+        "            if valor_actual > 5000:\n",
+        "                alerta = \"¡Subida fuerte del dólar!\"\n",
+        "            elif valor_actual < 3000:\n",
+        "                alerta = \"¡Bajada fuerte del dólar!\"\n",
+        "\n",
+        "            self.registros.append((numero_registro, valor_actual, alerta))\n",
+        "\n",
+        "        self.valor_cierre = valor_actual\n",
+        "        if valor_actual > self.base:\n",
+        "            cambio = \"subió\"\n",
+        "        elif valor_actual < self.base:\n",
+        "            cambio = \"bajó\"\n",
+        "        else:\n",
+        "            cambio = \"se mantuvo igual\"\n",
+        "\n",
+        "        self.mensaje_cierre = f\"El dólar cerró en ${valor_actual} y {cambio} respecto a la base.\"\n",
+        "\n",
+        "    def guardar_y_mostrar(self, nombre_archivo):\n",
+        "        # Guardamos los registros en el archivo CSV\n",
+        "        with open(nombre_archivo, mode='w', newline='') as archivo_csv:\n",
+        "            escritor = csv.writer(archivo_csv)\n",
+        "            escritor.writerow([\"Registro\", \"Valor del dólar\", \"Alerta / Mensaje\"])\n",
+        "            for fila in self.registros:\n",
+        "                escritor.writerow(fila)\n",
+        "\n",
+        "        # Leer el archivo CSV directamente sin pandas\n",
+        "        with open(nombre_archivo, mode='r') as archivo_csv:\n",
+        "            lector = csv.reader(archivo_csv)\n",
+        "            next(lector)  # Saltar el encabezado\n",
+        "            print(\"=== RESULTADO DE LA SIMULACIÓN DEL DÓLAR ===\")\n",
+        "            for fila in lector:\n",
+        "                print(fila)\n",
+        "\n",
+        "        # Mostrar el resumen final\n",
+        "        print(\"\\n=== RESUMEN FINAL ===\")\n",
+        "        print(self.mensaje_cierre)\n",
+        "\n",
+        "# Ejecutar simulación\n",
+        "simulador = SimuladorDeDólar()\n",
+        "simulador.simular()\n",
+        "simulador.guardar_y_mostrar(\"simulacion_dolar.csv\")"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "adbFD0CELAiY",
+        "outputId": "cfa6af0c-dec7-4920-ee29-19ebc0970755"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "=== RESULTADO DE LA SIMULACIÓN DEL DÓLAR ===\n",
+            "['1', '3837', '']\n",
+            "['2', '3690', '']\n",
+            "['3', '3860', '']\n",
+            "['4', '3727', '']\n",
+            "['5', '3716', '']\n",
+            "['6', '3914', '']\n",
+            "['7', '3675', '']\n",
+            "['8', '3863', '']\n",
+            "['9', '3767', '']\n",
+            "['10', '3802', '']\n",
+            "['11', '4059', '']\n",
+            "['12', '4207', '']\n",
+            "['13', '4362', '']\n",
+            "['14', '4248', '']\n",
+            "['15', '4519', '']\n",
+            "['16', '4434', '']\n",
+            "['17', '4594', '']\n",
+            "['18', '4766', '']\n",
+            "['19', '4611', '']\n",
+            "['20', '4394', '']\n",
+            "\n",
+            "=== RESUMEN FINAL ===\n",
+            "El dólar cerró en $4394 y subió respecto a la base.\n"
+          ]
+        }
+      ]
+    }
+  ]
+}
