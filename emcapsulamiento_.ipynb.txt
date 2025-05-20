@@ -1,0 +1,648 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": []
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "CD8hc37brdfW"
+      },
+      "outputs": [],
+      "source": [
+        "class Estudiante:\n",
+        "    def __init__(self, nombre, nota, id_estudiante):\n",
+        "        self.__nombre = nombre\n",
+        "        self.__nota = nota if 0 <= nota <= 100 else 0\n",
+        "        self.id_estudiante = id_estudiante\n",
+        "\n",
+        "    def get_nombre(self):\n",
+        "        return self.__nombre\n",
+        "\n",
+        "    def get_nota(self):\n",
+        "        return self.__nota\n",
+        "\n",
+        "    def set_nota(self, nueva_nota):\n",
+        "        if 0 <= nueva_nota <= 100:\n",
+        "            self.__nota = nueva_nota"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "class CuentaBancaria:\n",
+        "    def __init__(self, titular, saldo, numero_cuenta):\n",
+        "        self.__titular = titular\n",
+        "        self.__saldo = saldo\n",
+        "        self._numero_cuenta = numero_cuenta\n",
+        "\n",
+        "    def depositar(self, cantidad):\n",
+        "        if cantidad > 0:\n",
+        "            self.__saldo += cantidad\n",
+        "\n",
+        "    def retirar(self, cantidad):\n",
+        "        if 0 < cantidad <= self.__saldo:\n",
+        "            self.__saldo -= cantidad\n",
+        "\n",
+        "    def get_titular(self):\n",
+        "        return self.__titular"
+      ],
+      "metadata": {
+        "id": "BVKSIFQMrmIi"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "class Libro:\n",
+        "    def __init__(self, titulo, autor, paginas, isbn):\n",
+        "        self.__titulo = titulo\n",
+        "        self.__autor = autor\n",
+        "        self._paginas = paginas if paginas > 0 else 1\n",
+        "        self.isbn = isbn\n",
+        "\n",
+        "    def get_titulo(self):\n",
+        "        return self.__titulo\n",
+        "\n",
+        "    def get_autor(self):\n",
+        "        return self.__autor\n",
+        "\n",
+        "    def set_paginas(self, nuevas_paginas):\n",
+        "        if nuevas_paginas > 0:\n",
+        "            self._paginas = nuevas_paginas"
+      ],
+      "metadata": {
+        "id": "kOzOqptGroPW"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "class Vehiculo:\n",
+        "    def __init__(self, marca, velocidad, tipo):\n",
+        "        self.__marca = marca\n",
+        "        self.__velocidad = max(0, velocidad)\n",
+        "        self.tipo = tipo\n",
+        "\n",
+        "    def acelerar(self, incremento):\n",
+        "        if self.__velocidad + incremento <= 200:\n",
+        "            self.__velocidad += incremento\n",
+        "\n",
+        "    def frenar(self, decremento):\n",
+        "        self.__velocidad = max(0, self.__velocidad - decremento)"
+      ],
+      "metadata": {
+        "id": "oeaVESgoro9J"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "class Empleado:\n",
+        "    def __init__(self, nombre, salario, departamento, id_empleado):\n",
+        "        self.__nombre = nombre\n",
+        "        self.__salario = max(0, salario)\n",
+        "        self._departamento = departamento\n",
+        "        self.id_empleado = id_empleado\n",
+        "\n",
+        "    def get_nombre(self):\n",
+        "        return self.__nombre\n",
+        "\n",
+        "    def get_salario(self):\n",
+        "        return self.__salario\n",
+        "\n",
+        "    def get_departamento(self):\n",
+        "        return self._departamento\n",
+        "\n",
+        "    def set_salario(self, nuevo_salario):\n",
+        "        if nuevo_salario >= 0:\n",
+        "            self.__salario = nuevo_salario"
+      ],
+      "metadata": {
+        "id": "-0DZltOrrq9Q"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "class Producto:\n",
+        "    def __init__(self, nombre, precio, categoria, codigo):\n",
+        "        self.__nombre = nombre\n",
+        "        self.__precio = precio if precio > 0 else 1\n",
+        "        self._categoria = categoria\n",
+        "        self.codigo = codigo\n",
+        "\n",
+        "    def get_nombre(self):\n",
+        "        return self.__nombre\n",
+        "\n",
+        "    def get_precio(self):\n",
+        "        return self.__precio\n",
+        "\n",
+        "    def set_precio(self, nuevo_precio):\n",
+        "        if nuevo_precio > 0:\n",
+        "            self.__precio = nuevo_precio"
+      ],
+      "metadata": {
+        "id": "QDC2LKrOrug0"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "class Telefono:\n",
+        "    def __init__(self, numero, marca, bateria, modelo):\n",
+        "        self.__numero = numero\n",
+        "        self.__marca = marca\n",
+        "        self._bateria = min(100, max(0, bateria))\n",
+        "        self.modelo = modelo\n",
+        "\n",
+        "    def cargar_bateria(self, cantidad):\n",
+        "        self._bateria = min(100, self._bateria + cantidad)\n",
+        "\n",
+        "    def usar_telefono(self, cantidad):\n",
+        "        self._bateria = max(0, self._bateria - cantidad)"
+      ],
+      "metadata": {
+        "id": "u6tIfbmorv81"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "class Paciente:\n",
+        "    def __init__(self, nombre, edad, historial, numero_seguro):\n",
+        "        self.__nombre = nombre\n",
+        "        self.__edad = max(0, edad)\n",
+        "        self._historial = historial\n",
+        "        self.numero_seguro = numero_seguro\n",
+        "\n",
+        "    def get_nombre(self):\n",
+        "        return self.__nombre\n",
+        "\n",
+        "    def get_edad(self):\n",
+        "        return self.__edad\n",
+        "\n",
+        "    def set_edad(self, nueva_edad):\n",
+        "        if nueva_edad >= 0:\n",
+        "            self.__edad = nueva_edad"
+      ],
+      "metadata": {
+        "id": "JQKh6At2rxz0"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "class Computadora:\n",
+        "    def __init__(self, marca, almacenamiento, sistema, numero_serie):\n",
+        "        self.__marca = marca\n",
+        "        self.__almacenamiento = almacenamiento if almacenamiento > 0 else 1\n",
+        "        self._sistema_operativo = sistema\n",
+        "        self.numero_serie = numero_serie\n",
+        "\n",
+        "    def get_marca(self):\n",
+        "        return self.__marca\n",
+        "\n",
+        "    def get_almacenamiento(self):\n",
+        "        return self.__almacenamiento\n",
+        "\n",
+        "    def get_sistema_operativo(self):\n",
+        "        return self._sistema_operativo\n",
+        "\n",
+        "    def set_almacenamiento(self, nuevo_valor):\n",
+        "        if nuevo_valor > 0:\n",
+        "            self.__almacenamiento = nuevo_valor"
+      ],
+      "metadata": {
+        "id": "RpZwmRV2rzoO"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "class ReservaHotel:\n",
+        "    def __init__(self, nombre_huesped, noches, tipo_habitacion, codigo_reserva):\n",
+        "        self.__nombre_huesped = nombre_huesped\n",
+        "        self.__noches = noches if noches > 0 else 1\n",
+        "        self._tipo_habitacion = tipo_habitacion\n",
+        "        self.codigo_reserva = codigo_reserva\n",
+        "\n",
+        "    def get_nombre_huesped(self):\n",
+        "        return self.__nombre_huesped\n",
+        "\n",
+        "    def get_noches(self):\n",
+        "        return self.__noches\n",
+        "\n",
+        "    def set_noches(self, nuevas_noches):\n",
+        "        if nuevas_noches > 0:\n",
+        "            self.__noches = nuevas_noches"
+      ],
+      "metadata": {
+        "id": "vSKzSMkjr4JA"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "java\n"
+      ],
+      "metadata": {
+        "id": "KwFoHZqPr6fR"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "public class Estudiante {\n",
+        "    private String nombre;\n",
+        "    private int nota;\n",
+        "    public int idEstudiante;\n",
+        "\n",
+        "    public Estudiante(String nombre, int nota, int idEstudiante) {\n",
+        "        this.nombre = nombre;\n",
+        "        setNota(nota);\n",
+        "        this.idEstudiante = idEstudiante;\n",
+        "    }\n",
+        "\n",
+        "    public String getNombre() {\n",
+        "        return nombre;\n",
+        "    }\n",
+        "\n",
+        "    public int getNota() {\n",
+        "        return nota;\n",
+        "    }\n",
+        "\n",
+        "    public void setNota(int nota) {\n",
+        "        if (nota >= 0 && nota <= 100) {\n",
+        "            this.nota = nota;\n",
+        "        }\n",
+        "    }\n",
+        "}"
+      ],
+      "metadata": {
+        "id": "SWtkC4WMr7y6"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "public class CuentaBancaria {\n",
+        "    private String titular;\n",
+        "    private double saldo;\n",
+        "    protected String numeroCuenta;\n",
+        "\n",
+        "    public CuentaBancaria(String titular, double saldo, String numeroCuenta) {\n",
+        "        this.titular = titular;\n",
+        "        this.saldo = saldo;\n",
+        "        this.numeroCuenta = numeroCuenta;\n",
+        "    }\n",
+        "\n",
+        "    public void depositar(double cantidad) {\n",
+        "        if (cantidad > 0) {\n",
+        "            saldo += cantidad;\n",
+        "        }\n",
+        "    }\n",
+        "\n",
+        "    public void retirar(double cantidad) {\n",
+        "        if (cantidad > 0 && cantidad <= saldo) {\n",
+        "            saldo -= cantidad;\n",
+        "        }\n",
+        "    }\n",
+        "\n",
+        "    public String getTitular() {\n",
+        "        return titular;\n",
+        "    }\n",
+        "}"
+      ],
+      "metadata": {
+        "id": "4pDDCNr-r-q1"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "public class Libro {\n",
+        "    private String titulo;\n",
+        "    private String autor;\n",
+        "    protected int paginas;\n",
+        "    public String isbn;\n",
+        "\n",
+        "    public Libro(String titulo, String autor, int paginas, String isbn) {\n",
+        "        this.titulo = titulo;\n",
+        "        this.autor = autor;\n",
+        "        setPaginas(paginas);\n",
+        "        this.isbn = isbn;\n",
+        "    }\n",
+        "\n",
+        "    public String getTitulo() {\n",
+        "        return titulo;\n",
+        "    }\n",
+        "\n",
+        "    public String getAutor() {\n",
+        "        return autor;\n",
+        "    }\n",
+        "\n",
+        "    public void setPaginas(int paginas) {\n",
+        "        if (paginas > 0) {\n",
+        "            this.paginas = paginas;\n",
+        "        }\n",
+        "    }\n",
+        "}"
+      ],
+      "metadata": {
+        "id": "Inb-K0NNsCye"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "public class Vehiculo {\n",
+        "    private String marca;\n",
+        "    private int velocidad;\n",
+        "    public String tipo;\n",
+        "\n",
+        "    public Vehiculo(String marca, int velocidad, String tipo) {\n",
+        "        this.marca = marca;\n",
+        "        this.velocidad = Math.max(0, velocidad);\n",
+        "        this.tipo = tipo;\n",
+        "    }\n",
+        "\n",
+        "    public void acelerar(int incremento) {\n",
+        "        if (velocidad + incremento <= 200) {\n",
+        "            velocidad += incremento;\n",
+        "        }\n",
+        "    }\n",
+        "\n",
+        "    public void frenar(int decremento) {\n",
+        "        velocidad = Math.max(0, velocidad - decremento);\n",
+        "    }\n",
+        "}"
+      ],
+      "metadata": {
+        "id": "ty1_sJ3isDgQ"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "public class Empleado {\n",
+        "    private String nombre;\n",
+        "    private double salario;\n",
+        "    protected String departamento;\n",
+        "    public int idEmpleado;\n",
+        "\n",
+        "    public Empleado(String nombre, double salario, String departamento, int idEmpleado) {\n",
+        "        this.nombre = nombre;\n",
+        "        setSalario(salario);\n",
+        "        this.departamento = departamento;\n",
+        "        this.idEmpleado = idEmpleado;\n",
+        "    }\n",
+        "\n",
+        "    public String getNombre() {\n",
+        "        return nombre;\n",
+        "    }\n",
+        "\n",
+        "    public double getSalario() {\n",
+        "        return salario;\n",
+        "    }\n",
+        "\n",
+        "    public String getDepartamento() {\n",
+        "        return departamento;\n",
+        "    }\n",
+        "\n",
+        "    public void setSalario(double salario) {\n",
+        "        if (salario >= 0) {\n",
+        "            this.salario = salario;\n",
+        "        }\n",
+        "    }\n",
+        "}"
+      ],
+      "metadata": {
+        "id": "7r1VOhAlsFa9"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "public class Producto {\n",
+        "    private String nombre;\n",
+        "    private double precio;\n",
+        "    protected String categoria;\n",
+        "    public String codigo;\n",
+        "\n",
+        "    public Producto(String nombre, double precio, String categoria, String codigo) {\n",
+        "        this.nombre = nombre;\n",
+        "        setPrecio(precio);\n",
+        "        this.categoria = categoria;\n",
+        "        this.codigo = codigo;\n",
+        "    }\n",
+        "\n",
+        "    public String getNombre() {\n",
+        "        return nombre;\n",
+        "    }\n",
+        "\n",
+        "    public double getPrecio() {\n",
+        "        return precio;\n",
+        "    }\n",
+        "\n",
+        "    public void setPrecio(double precio) {\n",
+        "        if (precio > 0) {\n",
+        "            this.precio = precio;\n",
+        "        }\n",
+        "    }\n",
+        "}"
+      ],
+      "metadata": {
+        "id": "iWL9HdZwsHUy"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "public class Telefono {\n",
+        "    private String numero;\n",
+        "    private String marca;\n",
+        "    protected int bateria;\n",
+        "    public String modelo;\n",
+        "\n",
+        "    public Telefono(String numero, String marca, int bateria, String modelo) {\n",
+        "        this.numero = numero;\n",
+        "        this.marca = marca;\n",
+        "        this.bateria = Math.max(0, Math.min(100, bateria));\n",
+        "        this.modelo = modelo;\n",
+        "    }\n",
+        "\n",
+        "    public void cargarBateria(int cantidad) {\n",
+        "        bateria = Math.min(100, bateria + cantidad);\n",
+        "    }\n",
+        "\n",
+        "    public void usarTelefono(int cantidad) {\n",
+        "        bateria = Math.max(0, bateria - cantidad);\n",
+        "    }\n",
+        "}"
+      ],
+      "metadata": {
+        "id": "a3h9Xa91sJcC"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "public class Paciente {\n",
+        "    private String nombre;\n",
+        "    private int edad;\n",
+        "    protected String historial;\n",
+        "    public String numeroSeguro;\n",
+        "\n",
+        "    public Paciente(String nombre, int edad, String historial, String numeroSeguro) {\n",
+        "        this.nombre = nombre;\n",
+        "        setEdad(edad);\n",
+        "        this.historial = historial;\n",
+        "        this.numeroSeguro = numeroSeguro;\n",
+        "    }\n",
+        "\n",
+        "    public String getNombre() {\n",
+        "        return nombre;\n",
+        "    }\n",
+        "\n",
+        "    public int getEdad() {\n",
+        "        return edad;\n",
+        "    }\n",
+        "\n",
+        "    public void setEdad(int edad) {\n",
+        "        if (edad >= 0) {\n",
+        "            this.edad = edad;\n",
+        "        }\n",
+        "    }\n",
+        "}"
+      ],
+      "metadata": {
+        "id": "60I5UryUsL5C"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "public class Computadora {\n",
+        "    private String marca;\n",
+        "    private int almacenamiento;\n",
+        "    protected String sistemaOperativo;\n",
+        "    public String numeroSerie;\n",
+        "\n",
+        "    public Computadora(String marca, int almacenamiento, String sistemaOperativo, String numeroSerie) {\n",
+        "        this.marca = marca;\n",
+        "        setAlmacenamiento(almacenamiento);\n",
+        "        this.sistemaOperativo = sistemaOperativo;\n",
+        "        this.numeroSerie = numeroSerie;\n",
+        "    }\n",
+        "\n",
+        "    public String getMarca() {\n",
+        "        return marca;\n",
+        "    }\n",
+        "\n",
+        "    public int getAlmacenamiento() {\n",
+        "        return almacenamiento;\n",
+        "    }\n",
+        "\n",
+        "    public String getSistemaOperativo() {\n",
+        "        return sistemaOperativo;\n",
+        "    }\n",
+        "\n",
+        "    public void setAlmacenamiento(int almacenamiento) {\n",
+        "        if (almacenamiento > 0) {\n",
+        "            this.almacenamiento = almacenamiento;\n",
+        "        }\n",
+        "    }\n",
+        "}"
+      ],
+      "metadata": {
+        "id": "wQa7mnWHsN33"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "public class ReservaHotel {\n",
+        "    private String nombreHuesped;\n",
+        "    private int noches;\n",
+        "    protected String tipoHabitacion;\n",
+        "    public String codigoReserva;\n",
+        "\n",
+        "    public ReservaHotel(String nombreHuesped, int noches, String tipoHabitacion, String codigoReserva) {\n",
+        "        this.nombreHuesped = nombreHuesped;\n",
+        "        setNoches(noches);\n",
+        "        this.tipoHabitacion = tipoHabitacion;\n",
+        "        this.codigoReserva = codigoReserva;\n",
+        "    }\n",
+        "\n",
+        "    public String getNombreHuesped() {\n",
+        "        return nombreHuesped;\n",
+        "    }\n",
+        "\n",
+        "    public int getNoches() {\n",
+        "        return noches;\n",
+        "    }\n",
+        "\n",
+        "    public void setNoches(int noches) {\n",
+        "        if (noches > 0) {\n",
+        "            this.noches = noches;\n",
+        "        }\n",
+        "    }\n",
+        "}"
+      ],
+      "metadata": {
+        "id": "op3dxc26sPz1"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
