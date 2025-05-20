@@ -1,0 +1,284 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": []
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "KCz32qgnofsM"
+      },
+      "outputs": [],
+      "source": [
+        "class Animal:\n",
+        "    def hacer_sonido(self):\n",
+        "        pass\n",
+        "\n",
+        "class Perro(Animal):\n",
+        "    def hacer_sonido(self):\n",
+        "        return \"Guau\"\n",
+        "\n",
+        "class Gato(Animal):\n",
+        "    def hacer_sonido(self):\n",
+        "        return \"Miau\"\n",
+        "\n",
+        "# Prueba\n",
+        "print(Perro().hacer_sonido())\n",
+        "print(Gato().hacer_sonido())"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import math\n",
+        "\n",
+        "class Forma:\n",
+        "    def calcular_area(self):\n",
+        "        pass\n",
+        "\n",
+        "class Circulo(Forma):\n",
+        "    def __init__(self, radio):\n",
+        "        self.radio = radio\n",
+        "\n",
+        "    def calcular_area(self):\n",
+        "        return math.pi * self.radio ** 2\n",
+        "\n",
+        "class Rectangulo(Forma):\n",
+        "    def __init__(self, base, altura):\n",
+        "        self.base = base\n",
+        "        self.altura = altura\n",
+        "\n",
+        "    def calcular_area(self):\n",
+        "        return self.base * self.altura\n",
+        "\n",
+        "# Prueba\n",
+        "print(Circulo(3).calcular_area())\n",
+        "print(Rectangulo(4, 5).calcular_area())"
+      ],
+      "metadata": {
+        "id": "5HeSascmoiAY"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import math\n",
+        "\n",
+        "class Forma:\n",
+        "    def calcular_area(self):\n",
+        "        raise NotImplementedError\n",
+        "\n",
+        "class Circulo(Forma):\n",
+        "    def __init__(self, radio):\n",
+        "        self.radio = radio\n",
+        "\n",
+        "    def calcular_area(self):\n",
+        "        return math.pi * self.radio ** 2\n",
+        "\n",
+        "class Rectangulo(Forma):\n",
+        "    def __init__(self, ancho, alto):\n",
+        "        self.ancho = ancho\n",
+        "        self.alto = alto\n",
+        "\n",
+        "    def calcular_area(self):\n",
+        "        return self.ancho * self.alto\n",
+        "\n",
+        "# Prueba\n",
+        "c = Circulo(5)\n",
+        "r = Rectangulo(4, 6)\n",
+        "print(c.calcular_area())\n",
+        "print(r.calcular_area())"
+      ],
+      "metadata": {
+        "id": "CHXI46wpojsV"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "class Calculadora:\n",
+        "    def operar(self, *args):\n",
+        "        if len(args) == 2:\n",
+        "            return args[0] + args[1]\n",
+        "        elif len(args) > 2:\n",
+        "            resultado = 1\n",
+        "            for n in args:\n",
+        "                resultado *= n\n",
+        "            return resultado\n",
+        "        else:\n",
+        "            return \"Operación no válida\"\n",
+        "\n",
+        "# Prueba\n",
+        "c = Calculadora()\n",
+        "print(c.operar(3, 4))         # Suma: 7\n",
+        "print(c.operar(2, 3, 4))      # Multiplicación: 24"
+      ],
+      "metadata": {
+        "id": "04531xC8olk3"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "class Figura:\n",
+        "    def dibujar(self):\n",
+        "        return \"Dibujando figura genérica\"\n",
+        "\n",
+        "class Circulo(Figura):\n",
+        "    def dibujar(self):\n",
+        "        return \"Dibujando un círculo\"\n",
+        "\n",
+        "class Rectangulo(Figura):\n",
+        "    def dibujar(self):\n",
+        "        return \"Dibujando un rectángulo\"\n",
+        "\n",
+        "# Prueba\n",
+        "print(Circulo().dibujar())\n",
+        "print(Rectangulo().dibujar())"
+      ],
+      "metadata": {
+        "id": "M87Xcavdon7-"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "class Empleado:\n",
+        "    def trabajar(self):\n",
+        "        pass\n",
+        "\n",
+        "class Gerente(Empleado):\n",
+        "    def trabajar(self):\n",
+        "        return \"Supervisando al equipo\"\n",
+        "\n",
+        "class Desarrollador(Empleado):\n",
+        "    def trabajar(self):\n",
+        "        return \"Desarrollando software\"\n",
+        "\n",
+        "# Prueba\n",
+        "print(Gerente().trabajar())\n",
+        "print(Desarrollador().trabajar())"
+      ],
+      "metadata": {
+        "id": "x_ycmAkcoq8U"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "class Fruta:\n",
+        "    def describir(self):\n",
+        "        pass\n",
+        "\n",
+        "class Manzana(Fruta):\n",
+        "    def describir(self):\n",
+        "        return \"Soy una manzana, rica y saludable\"\n",
+        "\n",
+        "class Naranja(Fruta):\n",
+        "    def describir(self):\n",
+        "        return \"Soy una naranja, jugosa y cítrica\"\n",
+        "\n",
+        "# Prueba\n",
+        "print(Manzana().describir())\n",
+        "print(Naranja().describir())"
+      ],
+      "metadata": {
+        "id": "_Gcx8SV7ortx"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "class PaisCapital:\n",
+        "    def __init__(self, pais, capital):\n",
+        "        self.pais = pais\n",
+        "        self.capital = capital\n",
+        "\n",
+        "    def mostrar(self):\n",
+        "        return f\"La capital de {self.pais} es {self.capital}\"\n",
+        "\n",
+        "# Prueba\n",
+        "print(PaisCapital(\"Colombia\", \"Bogotá\").mostrar())"
+      ],
+      "metadata": {
+        "id": "gm2qWBhrouP2"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "class Pais:\n",
+        "    def idioma(self):\n",
+        "        pass\n",
+        "\n",
+        "class Mexico(Pais):\n",
+        "    def idioma(self):\n",
+        "        return \"Español\"\n",
+        "\n",
+        "class Alemania(Pais):\n",
+        "    def idioma(self):\n",
+        "        return \"Alemán\"\n",
+        "\n",
+        "# Prueba\n",
+        "print(Mexico().idioma())\n",
+        "print(Alemania().idioma())"
+      ],
+      "metadata": {
+        "id": "4bBbp8pQowMl"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "class Vehiculo:\n",
+        "    def encender(self):\n",
+        "        pass\n",
+        "\n",
+        "class Bicicleta(Vehiculo):\n",
+        "    def encender(self):\n",
+        "        return \"No tengo motor, lista para pedalear\"\n",
+        "\n",
+        "class Auto(Vehiculo):\n",
+        "    def encender(self):\n",
+        "        return \"Motor encendido\"\n",
+        "\n",
+        "# Prueba\n",
+        "print(Bicicleta().encender())\n",
+        "print(Auto().encender())"
+      ],
+      "metadata": {
+        "id": "aHIqdXLRox6Z"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
